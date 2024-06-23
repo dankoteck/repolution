@@ -1,3 +1,4 @@
+import { appInfo } from "@/config/supertokens/appInfo";
 import type { JwtHeader, JwtPayload, SigningKeyCallback } from "jsonwebtoken";
 import JsonWebToken from "jsonwebtoken";
 import jwksClient from "jwks-rsa";
@@ -7,7 +8,7 @@ import { SessionAuthForNextJS } from "./supertokens/sessionAuthForNextJS";
 import { TryRefreshComponent } from "./supertokens/tryRefreshClientComponent";
 
 const client = jwksClient({
-  jwksUri: `${process.env.SUPERTOKENS_CONNECTION_URI}/.well-known/jwks.json`,
+  jwksUri: `${appInfo.apiDomain}/${appInfo.apiBasePath}/.well-known/jwks.son`,
 });
 
 function getAccessToken(): string | undefined {
@@ -97,18 +98,15 @@ export async function HomePage() {
     return <TryRefreshComponent key={Date.now()} />;
   }
 
-  const userInfoResponse = await fetch(
-    `${process.env.BASE_URL || "http://localhost:3000"}/api/user`,
-    {
-      headers: {
-        /**
-         * We read the access token from the cookies and use that as a Bearer token when
-         * making network requests.
-         */
-        Authorization: "Bearer " + getAccessToken(),
-      },
-    }
-  );
+  const userInfoResponse = await fetch(`${appInfo.apiDomain}/api/user`, {
+    headers: {
+      /**
+       * We read the access token from the cookies and use that as a Bearer token when
+       * making network requests.
+       */
+      Authorization: "Bearer " + getAccessToken(),
+    },
+  });
 
   let message = "";
 

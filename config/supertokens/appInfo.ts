@@ -1,7 +1,10 @@
+export const websiteDomain = process.env.NEXT_PUBLIC_APP_DOMAIN as string;
+
 export const appInfo = {
   // learn more about this on https://supertokens.com/docs/thirdpartyemailpassword/appinfo
   appName: "repolution",
-  websiteDomain: process.env.BASE_URL || "http://localhost:3000",
-  apiDomain: process.env.BASE_URL || "http://localhost:3000",
+  websiteDomain,
+  apiDomain: websiteDomain,
   apiBasePath: "/api/auth",
+  websiteBasePath: "/auth",
 };

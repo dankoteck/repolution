@@ -8,8 +8,8 @@ export const backendConfig = (): TypeInput => {
   return {
     framework: "custom",
     supertokens: {
-      connectionURI: process.env.SUPERTOKENS_CONNECTION_URI as string,
-      apiKey: process.env.SUPERTOKENS_API_KEY,
+      connectionURI: process.env.NEXT_PUBLIC_CONNECTION_URI as string,
+      apiKey: process.env.NEXT_PUBLIC_API_KEY,
     },
     appInfo,
     recipeList: [
