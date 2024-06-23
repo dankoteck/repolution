@@ -1,14 +1,14 @@
-import { appInfo } from "@/config/supertokens/appInfo";
 import type { JwtHeader, JwtPayload, SigningKeyCallback } from "jsonwebtoken";
 import JsonWebToken from "jsonwebtoken";
 import jwksClient from "jwks-rsa";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+import { PropsWithChildren } from "react";
 import { SessionAuthForNextJS } from "./supertokens/sessionAuthForNextJS";
 import { TryRefreshComponent } from "./supertokens/tryRefreshClientComponent";
 
 const client = jwksClient({
-  jwksUri: `${appInfo.apiDomain}/${appInfo.apiBasePath}/.well-known/jwks.son`,
+  jwksUri: `${process.env.NEXT_PUBLIC_CONNECTION_URI}/.well-known/jwks.json`,
 });
 
 function getAccessToken(): string | undefined {
@@ -67,7 +67,7 @@ async function getSSRSessionHelper(): Promise<{
   }
 }
 
-export async function HomePage() {
+export async function HomePage({ children }: PropsWithChildren) {
   const { accessTokenPayload, hasToken, error } = await getSSRSessionHelper();
 
   if (error) {
@@ -98,40 +98,9 @@ export async function HomePage() {
     return <TryRefreshComponent key={Date.now()} />;
   }
 
-  const userInfoResponse = await fetch(`${appInfo.apiDomain}/api/user`, {
-    headers: {
-      /**
-       * We read the access token from the cookies and use that as a Bearer token when
-       * making network requests.
-       */
-      Authorization: "Bearer " + getAccessToken(),
-    },
-  });
-
-  let message = "";
-
-  if (userInfoResponse.status === 200) {
-    message = `Your user id is: ${accessTokenPayload.sub}`;
-  } else if (userInfoResponse.status === 500) {
-    message = "Something went wrong";
-  } else if (userInfoResponse.status === 401) {
-    // The TryRefreshComponent will try to refresh the session
-    // To learn about why the 'key' attribute is required refer to: https://github.com/supertokens/supertokens-node/issues/826#issuecomment-2092144048
-    return <TryRefreshComponent key={Date.now()} />;
-  } else if (userInfoResponse.status === 403) {
-    // SessionAuthForNextJS will redirect based on which claim is invalid
-    return <SessionAuthForNextJS />;
-  }
-
-  // You can use `userInfoResponse` to read the users session information
-
   /**
    * SessionAuthForNextJS will handle proper redirection for the user based on the different session states.
    * It will redirect to the login page if the session does not exist etc.
    */
-  return (
-    <SessionAuthForNextJS>
-      <div>{message}</div>
-    </SessionAuthForNextJS>
-  );
+  return <SessionAuthForNextJS>{children}</SessionAuthForNextJS>;
 }
