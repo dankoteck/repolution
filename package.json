@@ -9,18 +9,24 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "jsonwebtoken": "^9.0.2",
+    "jwks-rsa": "^3.1.0",
+    "next": "14.2.4",
+    "nextjs-cors": "^2.2.0",
     "react": "^18",
     "react-dom": "^18",
-    "next": "14.2.4"
+    "supertokens-auth-react": "^0.42.2",
+    "supertokens-node": "^18.0.1",
+    "supertokens-web-js": "^0.12.0"
   },
   "devDependencies": {
-    "typescript": "^5",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "eslint": "^8",
+    "eslint-config-next": "14.2.4",
     "postcss": "^8",
     "tailwindcss": "^3.4.1",
-    "eslint": "^8",
-    "eslint-config-next": "14.2.4"
+    "typescript": "^5"
   }
 }
