@@ -9,15 +9,22 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@radix-ui/react-popover": "^1.1.1",
+    "@radix-ui/react-slot": "^1.1.0",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.1.1",
     "jsonwebtoken": "^9.0.2",
     "jwks-rsa": "^3.1.0",
+    "lucide-react": "^0.396.0",
     "next": "14.2.4",
     "nextjs-cors": "^2.2.0",
     "react": "^18",
     "react-dom": "^18",
     "supertokens-auth-react": "^0.42.2",
     "supertokens-node": "^18.0.1",
-    "supertokens-web-js": "^0.12.0"
+    "supertokens-web-js": "^0.12.0",
+    "tailwind-merge": "^2.3.0",
+    "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
     "@types/node": "^20",
@@ -26,6 +33,8 @@
     "eslint": "^8",
     "eslint-config-next": "14.2.4",
     "postcss": "^8",
+    "prettier": "^3.3.2",
+    "prettier-plugin-tailwindcss": "^0.6.5",
     "tailwindcss": "^3.4.1",
     "typescript": "^5"
   }
