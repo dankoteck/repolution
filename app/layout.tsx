@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
-import { Inter as FontSans } from "next/font/google";
+import { Poppins as FontSans } from "next/font/google";
 
-import { SuperTokensProvider } from "@/components/supertokens/supertokensProvider";
 import { cn } from "@/lib/utils";
+
 import "./globals.css";
 
 const fontSans = FontSans({
   subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
   variable: "--font-sans",
 });
 
@@ -15,7 +16,7 @@ export const metadata: Metadata = {
   description: "SaaS to management all of your Github's repository contents",
 };
 
-export default async function RootLayout({
+export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
@@ -28,7 +29,7 @@ export default async function RootLayout({
           fontSans.variable,
         )}
       >
-        <SuperTokensProvider>{children}</SuperTokensProvider>
+        {children}
       </body>
     </html>
   );
