@@ -1,17 +1,16 @@
+import { validateRequest } from "@/lib/auth";
 import Link from "next/link";
 import LogoutButton from "../shared/logout-button";
 import { Popover, PopoverContent, PopoverTrigger } from "./popover";
-
-type Props = {
-  username: string;
-};
 
 const nav = [
   { text: "Home", href: "/" },
   { text: "Settings", href: "/settings" },
 ];
 
-export default async function UIHeader({ username }: Props) {
+export default async function UIHeader() {
+  const { user } = await validateRequest();
+
   return (
     <header className="border-b border-[#C9ADA7] bg-[#22223B] pb-24">
       <div className="container">
@@ -19,14 +18,16 @@ export default async function UIHeader({ username }: Props) {
           <Link href="/">
             <h1 className="text-2xl font-bold uppercase">Repolution</h1>
           </Link>
-          <Popover>
-            <PopoverTrigger>
-              Hello, <span className="font-bold">{username}</span>
-            </PopoverTrigger>
-            <PopoverContent>
-              <LogoutButton />
-            </PopoverContent>
-          </Popover>
+          {user && (
+            <Popover>
+              <PopoverTrigger>
+                Hello, <span className="font-bold">{user.username}</span>
+              </PopoverTrigger>
+              <PopoverContent>
+                <LogoutButton />
+              </PopoverContent>
+            </Popover>
+          )}
         </div>
 
         <nav className="py-5">

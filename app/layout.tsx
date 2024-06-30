@@ -3,6 +3,7 @@ import { Poppins as FontSans } from "next/font/google";
 
 import { cn } from "@/lib/utils";
 
+import UIHeader from "@/components/ui/header";
 import "./globals.css";
 
 const fontSans = FontSans({
@@ -29,7 +30,8 @@ export default function RootLayout({
           fontSans.variable,
         )}
       >
-        {children}
+        <UIHeader />
+        <main className="container -mt-24 w-full">{children}</main>
       </body>
     </html>
   );
