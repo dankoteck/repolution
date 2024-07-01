@@ -60,7 +60,7 @@ export default async function HomePage() {
               )}
             >
               <div>
-                <Badge>{repo.language}</Badge>
+                {repo.language && <Badge>{repo.language}</Badge>}
                 <p className="mt-2 flex items-center gap-1">
                   <span className="text-lg font-bold text-white">
                     {repo.name}
@@ -79,7 +79,7 @@ export default async function HomePage() {
                 </p>
               </div>
               <Link
-                href={`/project/${repo.id}`}
+                href={`/projects/${repo.name}`}
                 className="flex h-10 items-center justify-center whitespace-nowrap rounded-lg bg-[#F2E9E4] px-4 py-2 text-sm font-medium text-[#22223B]"
               >
                 Import

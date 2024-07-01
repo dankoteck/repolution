@@ -12,7 +12,7 @@ export default async function UIHeader() {
   const { user } = await validateRequest();
 
   return (
-    <header className="border-b border-[#C9ADA7] bg-[#22223B] pb-24">
+    <header className="border-b border-[#C9ADA7] bg-[#22223B] pb-28">
       <div className="container">
         <div className="flex items-center justify-between border-b border-[#C9ADA7]/50 py-5">
           <Link href="/">
