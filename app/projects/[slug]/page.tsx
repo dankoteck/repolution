@@ -1,6 +1,5 @@
 import { validateRequest } from "@/lib/auth";
 import { redirect } from "next/navigation";
-import { PropsWithChildren } from "react";
 import AboutGrid from "./_grids/about";
 import BranchesGrid from "./_grids/about/branches";
 import ActionsGrid from "./_grids/actions";
@@ -8,7 +7,7 @@ import DeploymentsGrid from "./_grids/deployments";
 import IssuesGrid from "./_grids/issues";
 import PullRequestGrid from "./_grids/pull-request";
 
-type Props = PropsWithChildren & {
+type Props = {
   params: {
     slug: string;
   };
