@@ -33,7 +33,7 @@ export default async function HomePage() {
             height={36}
             className="invert"
           />
-          <div className="flex min-w-0 flex-1 flex-col gap-1">
+          <div className="flex min-w-0 flex-1 flex-col">
             <h2 className="text-2xl font-bold capitalize">
               Import Github Repository
             </h2>
@@ -48,45 +48,50 @@ export default async function HomePage() {
           />
         </div>
 
-        <ul className="mt-4 rounded-md border border-dashed border-[#C9ADA7]">
-          {repos.map((repo, index) => (
-            <li
-              key={repo.id}
-              className={cn(
-                "flex items-center justify-between gap-2 border-b border-dashed border-[#C9ADA7] px-4 py-6",
-                {
-                  "border-b-0": index === repos.length - 1,
-                },
-              )}
-            >
-              <div>
-                {repo.language && <Badge>{repo.language}</Badge>}
-                <p className="mt-2 flex items-center gap-1">
-                  <span className="text-lg font-bold text-white">
-                    {repo.name}
-                  </span>
-                  &bull;
-                  <span className="text-xs font-normal text-[#F2E9E4]">
-                    {dayjs().to(dayjs(repo.updated_at))}
-                  </span>
-                </p>
-                <p
-                  className={cn("mt-1 line-clamp-1 text-sm text-gray-400", {
-                    "text-xs italic text-[#C9ADA7]": !repo.description,
-                  })}
-                >
-                  {repo.description ? repo.description : "(No description)"}
-                </p>
-              </div>
-              <Link
-                href={`/projects/${repo.name}`}
-                className="flex h-10 items-center justify-center whitespace-nowrap rounded-lg bg-[#F2E9E4] px-4 py-2 text-sm font-medium text-[#22223B]"
+        {repos.length > 0 && (
+          <ul className="mt-4 rounded-md border border-dashed border-[#C9ADA7]">
+            {repos.map((repo, index) => (
+              <li
+                key={repo.id}
+                className={cn(
+                  "flex items-center justify-between gap-2 border-b border-dashed border-[#C9ADA7] px-4 py-6",
+                  {
+                    "border-b-0": index === repos.length - 1,
+                  },
+                )}
               >
-                Import
-              </Link>
-            </li>
-          ))}
-        </ul>
+                <div>
+                  {repo.language && <Badge>{repo.language}</Badge>}
+                  <p className="mt-2 flex items-center gap-1">
+                    <span className="text-lg font-bold text-white">
+                      {repo.name}
+                    </span>
+                    &bull;
+                    <span className="text-xs font-normal text-[#F2E9E4]">
+                      {dayjs().to(dayjs(repo.updated_at))}
+                    </span>
+                  </p>
+                  <p
+                    className={cn(
+                      "mt-1 line-clamp-1 text-xs text-[#C9ADA7]/50",
+                      {
+                        italic: !repo.description,
+                      },
+                    )}
+                  >
+                    {repo.description ? repo.description : "(No description)"}
+                  </p>
+                </div>
+                <Link
+                  href={`/projects/${repo.name}`}
+                  className="flex h-10 items-center justify-center whitespace-nowrap rounded-lg bg-[#F2E9E4] px-4 py-2 text-sm font-medium text-[#22223B]"
+                >
+                  Import
+                </Link>
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
     </section>
   );

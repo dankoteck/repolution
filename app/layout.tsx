@@ -31,7 +31,7 @@ export default function RootLayout({
         )}
       >
         <UIHeader />
-        <main className="container -mt-28 w-full">{children}</main>
+        <main className="container -mt-28 mb-28 w-full">{children}</main>
       </body>
     </html>
   );

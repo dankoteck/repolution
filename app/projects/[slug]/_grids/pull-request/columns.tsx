@@ -2,12 +2,12 @@
 
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-import { Issues } from "@/lib/service";
-import { formatDate } from "@/lib/utils";
+import { PullRequests } from "@/lib/service";
+import { cn, formatDate } from "@/lib/utils";
 import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDownIcon } from "lucide-react";
 
-export const columns: ColumnDef<Issues[0]>[] = [
+export const columns: ColumnDef<PullRequests[0]>[] = [
   {
     accessorKey: "title",
     header: ({ column }) => {
@@ -16,7 +16,7 @@ export const columns: ColumnDef<Issues[0]>[] = [
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
-          Issues
+          Pull Requests
           <ArrowUpDownIcon className="ml-2 h-4 w-4" />
         </Button>
       );
@@ -34,7 +34,13 @@ export const columns: ColumnDef<Issues[0]>[] = [
 
           <div className="flex flex-col gap-1">
             <p className="line-clamp-1 text-sm font-medium">{title}</p>
-            <p className="line-clamp-1 text-xs text-[#F2E9E4]/50">{body}</p>
+            <p
+              className={cn("line-clamp-1 text-xs text-[#F2E9E4]/50", {
+                italic: !!body,
+              })}
+            >
+              {body ? body : "(No description)"}
+            </p>
           </div>
         </div>
       );

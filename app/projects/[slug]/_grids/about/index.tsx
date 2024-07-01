@@ -1,7 +1,7 @@
 import GithubIcon from "@/assets/icons/github.svg";
 import { Badge } from "@/components/ui/badge";
 import { getRepoById } from "@/lib/service";
-import { formatDate } from "@/lib/utils";
+import { cn, formatDate } from "@/lib/utils";
 import { GitForkIcon, SquareArrowOutUpRightIcon, StarIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -39,7 +39,7 @@ export default async function AboutGrid({ owner, slug }: Props) {
           </Link>
         )}
 
-        <Badge className="mt-2 flex w-fit items-center gap-1">
+        <Badge className="mt-4 flex w-fit items-center gap-1">
           <Image alt="Github Logo" src={GithubIcon} width={16} height={16} />
           <span className="line-clamp-1">{repo.full_name}</span>
         </Badge>
@@ -64,7 +64,13 @@ export default async function AboutGrid({ owner, slug }: Props) {
           )}
         </div>
 
-        <p className="mt-4 text-sm">{repo.description}</p>
+        <p
+          className={cn("mt-4 text-sm", {
+            "italic text-[#C9ADA7]/50": !repo.description,
+          })}
+        >
+          {repo.description ? repo.description : "(No description)"}
+        </p>
       </div>
 
       <div className="mt-8 flex items-center justify-between">
